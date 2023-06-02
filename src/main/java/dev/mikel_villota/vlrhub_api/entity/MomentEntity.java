@@ -7,7 +7,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "moment")
+@Table(name = "moments")
 @Data
 public class MomentEntity {
     @Id

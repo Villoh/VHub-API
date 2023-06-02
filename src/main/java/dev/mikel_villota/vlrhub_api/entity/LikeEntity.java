@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "like")
+@Table(name = "likes")
 @Data
 public class LikeEntity {
     @Id
@@ -29,6 +29,7 @@ public class LikeEntity {
     @PreUpdate
     private void validateConstraints() {
         if ((vly == null && moment == null) || (vly != null && moment != null)) {
+            System.out.println(getVly().getVlyId());
             throw new IllegalStateException("Exactly one of fk_vly or fk_moment must be non-null.");
         }
     }

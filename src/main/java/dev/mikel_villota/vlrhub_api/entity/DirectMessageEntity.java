@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "direct_message")
+@Table(name = "direct_messages")
 @Data
 public class DirectMessageEntity {
     @Id
