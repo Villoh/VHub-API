@@ -40,6 +40,9 @@ public class UserEntity {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
-    @Column(name = "verified", nullable = false)
+    @Column(name = "is_verified", nullable = false)
     private boolean verified;
+
+    @Column(name = "is_admin", nullable = false)
+    private Boolean admin;
 }
