@@ -6,7 +6,6 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
@@ -21,13 +20,13 @@ public class EncryptionUtils {
      * @param seed ({@link String}) used to generate the random SecretKey
      * @return {@link SecretKey}
      */
-    public static SecretKey generateRandomSecretKey(String seed) {
+    public static SecretKey generateRandomSecretKey() {
         SecretKey secretKey = null;
         try {
-            SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
-            secureRandom.setSeed(seed.getBytes());
+            //SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+            //secureRandom.setSeed(seed.getBytes());
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(256,secureRandom);
+            keyGenerator.init(256);
             secretKey = keyGenerator.generateKey();
         } catch (NoSuchAlgorithmException e) {
             System.err.println("Error generating random secretKey: " + e.getMessage());
@@ -46,7 +45,7 @@ public class EncryptionUtils {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             IvParameterSpec iv = new IvParameterSpec(new byte[cipher.getBlockSize()]);
-            cipher.init(Cipher.ENCRYPT_MODE, generateRandomSecretKey(seed), iv);
+            cipher.init(Cipher.ENCRYPT_MODE, generateRandomSecretKey(), iv);
             ciphertext = cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
             System.err.println("Error encrypting plaintext: " + e.getMessage());
@@ -65,7 +64,7 @@ public class EncryptionUtils {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             IvParameterSpec iv = new IvParameterSpec(new byte[cipher.getBlockSize()]);
-            cipher.init(Cipher.DECRYPT_MODE, generateRandomSecretKey(seed), iv);
+            cipher.init(Cipher.DECRYPT_MODE, generateRandomSecretKey(), iv);
             byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(ciphertext));
             plaintext = new String(decrypted, StandardCharsets.UTF_8);
         } catch (Exception e) {
