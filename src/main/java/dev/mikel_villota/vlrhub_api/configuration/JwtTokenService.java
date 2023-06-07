@@ -22,8 +22,6 @@ public class JwtTokenService {
     private String secretKey;
     @Value("${application.security.jwt.expiration}")
     private int jwtExpiration;
-    @Value("${application.security.jwt.refresh-token.expiration}")
-    private int refreshExpiration;
 
     /**
      * Extracts the subject (user phone) from a JWT token.
@@ -67,18 +65,6 @@ public class JwtTokenService {
             UserDetails userDetails
     ) {
         return buildToken(extraClaims, userDetails, jwtExpiration);
-    }
-
-    /**
-     * Generates a refresh token for the given user details.
-     * @param userDetails the user details for whom the refresh token is generated
-     * @return the generated refresh token
-     */
-    public String generateRefreshToken(
-            UserDetails userDetails
-    ) {
-
-        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
 
     /**
