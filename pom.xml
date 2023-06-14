@@ -8,11 +8,11 @@
 		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>dev.mikel_villota</groupId>
-	<artifactId>VLRHub-API</artifactId>
+	<groupId>dev.mikel_v</groupId>
+	<artifactId>VHub-API</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>VLRHub API</name>
-	<description>VLRHub API</description>
+	<name>VHub API</name>
+	<description>VHub API for the VHub Mobile app</description>
 	<properties>
 		<java.version>20</java.version>
 	</properties>
